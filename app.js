@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/movies');
-=
+
 mongoose.connect('mongodb+srv://cbeck3:' + process.env.MONGO_ATLAS_PW +
     '@mycluster-akj1d.mongodb.net/test?retryWrites=true&w=majority',
     {
