@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" class="hasjs">
+  <head>
+    <title> Final-Project</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+      <link rel="stylesheet" media="screen" href="css/reset.css" />
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <script async src="js/jscript.js"></script>
+  </head>
+<body>
+  <header>
+    <nav id="navbar">
+      <div class="nav-container">
+        <ul>
+          <li> <a href="index.html"> Home Page </a></li>
+          <li> <a href="movie.html"> Movie </a> </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+    <div>
+      <p id="contact_par">Please add a movie to review</p>
+    </div>
+    <form action="#" method="POST" autocomplete="on" onsubmit="init()">
+      <div id="container">
+        <label> Name </label>
+        <input type="text" name="Movie Name" value="" placeholder="Movie Name" id="name">
+        <label> Rating</label>
+        <input type="text" name="Rating" value="" placeholder="1 to 5" id="name">
+        <label for="subject">Review</label>
+        <textarea name="subject" placeholder="Write what you think about the movie..." style="height:200px" id="subject"></textarea>
+        <div id="btn">
+          <input type="submit" value="Add">
+        </div>
+    </div>
+  </form>
+</body>
+</html>
