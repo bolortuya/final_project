@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Product = require('../models/movie_model');
+const Movie = require('./models/movie_model');
 
 router.get('/', (req, res, next) => {
-    Product.find()
+  Movie.find()
         // .select('_id name price')
         .select('-__v')
         .exec()
         .then(docs => {
             const response = {
                 count: docs.length,
-                products: docs.map(doc => {
+                movies: docs.map(doc => {
                     return {
-                        product: doc,
+                        movie: doc,
                         request: {
                             type: "GET",
-                            url: "http://localhost:3000/products/" + doc._id
+                            url: "http://localhost:3000/movies/" + doc._id
                         }
                     }
                 })
@@ -39,24 +39,26 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const product = new Product({
+    const movie = new Movie({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
-        price: req.body.price
+        rating: req.body.rating,
+        description: req.body.description
     });
-    product
+    movie
         .save()
         .then(result => {
             res.status(201).json({
-                message: 'Created product successfully',
+                message: 'Created movie successfully',
                 createdProduct: {
                     name: result.name,
-                    price: result.price,
+                    rating: result.rating,
+                    review: result.review,
                     _id: result.id
                 },
                 request: {
                     type: "GET",
-                    url: "http://localhost:3000/products/" + result._id
+                    url: "http://localhost:3000/movies/" + result._id
                 }
             });
         })
@@ -68,9 +70,9 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.get('/:productID', (req, res, next) => {
+router.get('/:movieID', (req, res, next) => {
     const id = req.params.productID;
-    Product.findById(id)
+    Movie.findsById(id)
         .select('-__v')
         .exec()
         .then(doc => {
@@ -78,8 +80,8 @@ router.get('/:productID', (req, res, next) => {
                 product: doc,
                 request: {
                     type: 'GET',
-                    description: 'Get all products',
-                    url: 'http://localhost:3000/products'
+                    description: 'Get all movies',
+                    url: 'http://localhost:3000/movies'
                 }
             });
         })
@@ -89,20 +91,20 @@ router.get('/:productID', (req, res, next) => {
         });
 });
 
-router.patch('/:productID', (req, res, next) => {
+router.patch('/:movieID', (req, res, next) => {
     const id = req.params.productID;
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Product.updateOne({ _id: id}, {$set: updateOps })
+    Movie.updateOne({ _id: id}, {$set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Product updated',
+                message: 'Movie updated',
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/products/' + id
+                    url: 'http://localhost:3000/movies/' + id
                 }
             });
         })
@@ -112,17 +114,17 @@ router.patch('/:productID', (req, res, next) => {
         });
 });
 
-router.delete('/:productID', (req, res, next) => {
+router.delete('/:movieID', (req, res, next) => {
     const id = req.params.productID;
-    Product.deleteOne({ _id: id})
+    Movie.deleteOne({ _id: id})
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Product deleted',
+                message: 'Movie deleted',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/products',
-                    body: { name: 'String', price: 'Number' }
+                    url: 'http://localhost:3000/movies',
+                    body: { name: 'String', rating: 'Number', review: 'String'}
                 }
             });
         })

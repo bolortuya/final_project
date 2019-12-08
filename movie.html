@@ -22,18 +22,36 @@
     <div>
       <p id="contact_par">Please add a movie to review</p>
     </div>
-    <form action="#" method="POST" autocomplete="on" onsubmit="init()">
+    <form id="movieSelect" action="#" method="POST" autocomplete="on" onsubmit="init()">
       <div id="container">
         <label> Name </label>
-        <input type="text" name="Movie Name" value="" placeholder="Movie Name" id="name">
+        <input type="text" name="Movie Name" value="" placeholder="Movie Name" id="movieName">
         <label> Rating</label>
-        <input type="text" name="Rating" value="" placeholder="1 to 5" id="name">
+        <input type="number" name="Rating" value="" placeholder="1 to 10" id="movieRating"><br></br>
         <label for="subject">Review</label>
-        <textarea name="subject" placeholder="Write what you think about the movie..." style="height:200px" id="subject"></textarea>
+        <textarea name="subject" placeholder="Write what you think about the movie..." style="height:200px" id="movieDescription"></textarea>
         <div id="btn">
-          <input type="submit" value="Add">
+          <input type="button" value="Create Movie" onclick="postMovie();">
         </div>
     </div>
-  </form>
+    </form>
+        
+        <br><br>
+
+        <div id="btn">
+          <input type="button" value="Display All Movies" onclick="displayAllMovies()">
+        </div>
+        <table style="width: 100%">
+            <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                        <th>ID</th>
+                    </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
 </body>
 </html>
