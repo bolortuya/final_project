@@ -2,17 +2,17 @@ function init(e) {
   var button = document.getElementById('btn');
 	var email = document.getElementById("email");
 
-  if(Name.value == "") {
+  if(movieName.value == "") {
 		alert("Please enter the name of the movie!");
     e.preventDefault();
 		return false;
 	}
-  if(Rating.value > 10 || Rating.value < 1) {
+  if(movieRating.value > 10 || Rating.value < 1) {
 		alert("Please enter a rating between 1 and 5!");
     e.preventDefault();
 		return false;
 	}
-  if(Review.value == "") {
+  if(movieDescription.value == "") {
 		alert("Please write a review!");
     e.preventDefault();
 		return false;
@@ -70,28 +70,4 @@ function Movie(mName,mRating,mDescription){
     this.name = pName;
     this.mRating = mRating;
     this.mDescription = mDescription;
-}
-function init(e) {
-  var button = document.getElementById('btn');
-	var email = document.getElementById("email");
-
-  if(firstname.value == "") {
-		alert("Please enter the movie name!");
-    e.preventDefault();
-		return false;
-	}
-  if(subject.value == "") {
-		alert("Please enter the rating!");
-    e.preventDefault();
-		return false;
-	}
-  if(subject.value == "") {
-    alert("Please leave a review!");
-    e.preventDefault();
-    return false;
-  }
-  else {
-		alert("Message sent!");
-		return true;
-	}
 }
